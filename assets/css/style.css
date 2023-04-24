@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+#page-heading {
+    margin: 25px;
+}
+
+#page-heading:hover{
+    color: blue;
+}
+
+.align-center{
+    text-align: center;
+}
+
+#container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#container ul{
+    padding: 0;
+    list-style: none;
+    width: 484px;
+}
+
+.contact{
+    padding: 3px 10px;
+    border: 1px solid white;
+    background-color: blue;
+    box-shadow: 1px 1px 1px 1px lightgray;
+    color: white;
+    display: flex;
+}
+
+.contact .details{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.contact .delete-button{
+    width: 10%;
+    padding: 3px;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.contact .delete-button a{
+    color: red;
+    /* background-color: white; */
+}
+
+.contact p{
+    margin: 5px 0;
+}
+
+#container li:hover{
+    background-color: grey;
+}
+
+.contact-logo{
+    width: 10%;
+    padding: 3px;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.submit-button{
+    background-color: blue;
+    color: white;
+}
+
+.submit-button:hover{
+    background-color: grey;
+}
