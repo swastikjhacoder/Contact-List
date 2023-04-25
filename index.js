@@ -2,13 +2,11 @@ const express = require('express');
 const path = require('path');
 const { title } = require('process');
 const port = 8000;
-const bodyparser = require('body-parser');
 
 const db = require('./config/mongoose');
 const Contact = require('./models/contact');
 
 const app = express();
-app.use(bodyparser.json());
 
 app.set('view engine','ejs');
 app.set('views', path.join(__dirname,'views'));
@@ -51,28 +49,23 @@ app.get('/', function(req, res){
     });
 });
 
-app.post('/create-contact', async function(req,res){
+app.post('/create-contact', function(req,res){
     // contactList.push({
     //     name: req.body.name,
     //     phone: req.body.phone
     // });
     // contactList.push(req.body);
-    console.log(req.body);
-    const newContact = await Contact.create({
+
+    Contact.create({
         name: req.body.name,
         phone: req.body.phone
-    })
-    return res.send(newContact);
-    // Contact.create({
-    //     name: req.body.name,
-    //     phone: req.body.phone
-    // }), function(err, newContact){
-    //     if(err){console.log('error in creating a contact!');
-    //     return;}
+    }), function(err, newContact){
+        if(err){console.log('error in creating a contact!');
+        return;}
 
-    //     console.log('********', newContact);
-    //     return res.redirect('back');
-    // }
+        console.log('********', newContact);
+        return res.redirect('back');
+    }
     
 });
 
