@@ -2,11 +2,13 @@ const express = require('express');
 const path = require('path');
 const { title } = require('process');
 const port = 8000;
+const bodyparser = require('body-parser');
 
 const db = require('./config/mongoose');
 const Contact = require('./models/contact');
 
 const app = express();
+app.use(bodyparser.json());
 
 app.set('view engine','ejs');
 app.set('views', path.join(__dirname,'views'));
@@ -15,20 +17,24 @@ app.use(express.static('assets'));
 
 var contactList = [
     {
-        name: 'Swastik',
-        phone: '9674910207'
+        name: 'Captain America',
+        phone: '1111111111'
     },
     {
-        name: 'Suvechha',
-        phone: '9674910208'
+        name: 'Iron Man',
+        phone: '2222222222'
     },
     {
-        name: 'Swapan',
-        phone: '9339296529'
+        name: 'Thor',
+        phone: '3333333333'
     },
     {
-        name: 'Riti',
-        phone: '9830930158'
+        name: 'Spider Man',
+        phone: '4444444444'
+    },
+    {
+        name: 'Hulk',
+        phone: '5555555555'
     }
 ]
 
@@ -45,23 +51,28 @@ app.get('/', function(req, res){
     });
 });
 
-app.post('/create-contact', function(req,res){
+app.post('/create-contact', async function(req,res){
     // contactList.push({
     //     name: req.body.name,
     //     phone: req.body.phone
     // });
     // contactList.push(req.body);
-
-    Contact.create({
+    console.log(req.body);
+    const newContact = await Contact.create({
         name: req.body.name,
         phone: req.body.phone
-    }), function(err, newContact){
-        if(err){console.log('error in creating a contact!');
-        return;}
+    })
+    return res.send(newContact);
+    // Contact.create({
+    //     name: req.body.name,
+    //     phone: req.body.phone
+    // }), function(err, newContact){
+    //     if(err){console.log('error in creating a contact!');
+    //     return;}
 
-        console.log('********', newContact);
-        return res.redirect('back');
-    }
+    //     console.log('********', newContact);
+    //     return res.redirect('back');
+    // }
     
 });
 
