@@ -37,11 +37,7 @@ var contactList = [
 ]
 
 app.get('/', function(req, res){
-    Contact.find({}, function(err, contacts){
-        if(err){
-            console.log('Error in fetching contacts fromthe database');
-            return;
-        }
+    Contact.find({}).then(contacts=>{
         return res.render('index',{
             title: "My Contact List",
             contact_list: contacts
@@ -50,12 +46,6 @@ app.get('/', function(req, res){
 });
 
 app.post('/create-contact', function(req,res){
-    // contactList.push({
-    //     name: req.body.name,
-    //     phone: req.body.phone
-    // });
-    // contactList.push(req.body);
-
     Contact.create({
         name: req.body.name,
         phone: req.body.phone
